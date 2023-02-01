@@ -8,25 +8,9 @@ import { Game } from '../models';
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.css']
 })
-export class DisplayComponent implements OnInit, OnDestroy {
+export class DisplayComponent {
 
+  @Input()
   games: Game[] = []
-
-  sub$!: Subscription
-
-  constructor(private bggSvc: BGGService) { }
-
-  ngOnInit(): void {
-    this.sub$ = this.bggSvc.onSearchResults.subscribe(
-      (games) => {
-        this.games = games
-      }
-    )
-  }
-
-  ngOnDestroy(): void {
-    this.sub$.unsubscribe()
-
-  }
 
 }

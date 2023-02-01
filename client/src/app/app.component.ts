@@ -10,25 +10,11 @@ import { BGGService } from './bgg.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
+export class AppComponent {
 
-  searchTerms = ""
-  sub$!: Subscription
+  games: Game[] = []
 
-  constructor(private bggSvc: BGGService) {}
-
-  ngOnInit(): void {
-    this.sub$ = this.bggSvc.onSearchQuery.subscribe(
-      (name: string) => {
-        this.searchTerms = name
-      }
-    )
-  }
-
-  ngOnDestroy(): void {
-    this.sub$.unsubscribe()
-  }
-
-  ngAfterViewInit(): void {
+  onResults(games: Game[]) {
+    this.games = games
   }
 }

@@ -18,10 +18,7 @@ export class BGGService {
     const params = new HttpParams().set("name", name)
     return firstValueFrom(
       this.http.get<Game[]>(`${BACKEND}/api/games`, { params })
-    ).then(results => {
-      this.onSearchResults.next(results)
-      return results;
-    })
+    )
   }
 
 }

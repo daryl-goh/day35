@@ -11,6 +11,9 @@ import { Game } from '../models';
 })
 export class SearchComponent implements OnInit {
 
+  @Output()
+  onResults = new Subject<Game[]>
+
   searchForm!: FormGroup
 
   constructor(private fb: FormBuilder, private bggSvc: BGGService) { }
@@ -25,6 +28,7 @@ export class SearchComponent implements OnInit {
     this.bggSvc.searchGameByName(name)
       .then(games => {
         console.info('>>> games: ', games)
+        this.onResults.next(games)
         this.searchForm.reset()
       })
       .catch(error => {
